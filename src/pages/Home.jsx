@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Card from "../components/card/Card";   // ← THIS IS THE CORRECT PATH
+import Card from "../components/card/Card";  // ← THIS IS THE EXACT CORRECT PATH
 
 const Home = () => {
   const [animes, setAnimes] = useState([]);
