@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home.jsx";
-import Watch from "./pages/Watch.jsx";
+import Home from "./Home.jsx";
+import Watch from "./Watch.jsx";
 
 function App() {
   return (
