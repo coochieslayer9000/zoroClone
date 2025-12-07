@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Card from "../components/card/Card.jsx";
+import Card from "../components/Card/Card.jsx";
 
 const Home = () => {
   const [animes, setAnimes] = useState([]);
