@@ -15,12 +15,12 @@ const Watch = () => {
       });
   }, [id]);
 
-  if (loading) return <div className="flex items-center justify-center h-screen text-3xl">Loading...</div>;
+  if (loading) return <div className="flex items-center justify-center h-screen text-3xl text-white">Loading...</div>;
   if (!anime) return <div className="flex items-center justify-center h-screen text-red-500 text-2xl">Anime not found</div>;
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8">
-      <a href="/home" className="text-blue-400 mb-6 inline-block">&larr; Back</a>
+      <a href="/home" className="text-blue-400 mb-6 inline-block text-xl">← Back</a>
       <div className="flex flex-col lg:flex-row gap-10">
         <img src={anime.image} alt={anime.title} className="w-80 rounded-xl shadow-2xl" />
         <div>
