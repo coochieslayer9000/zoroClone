@@ -6,11 +6,13 @@ import Watch from "./pages/Watch.jsx";
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/watch/:id" element={<Watch />} />
-      </Routes>
+      <div className="min-h-screen bg-slate-900 text-white">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/watch/:id" element={<Watch />} />
+        </Routes>
+      </div>
     </Router>
   );
 }
