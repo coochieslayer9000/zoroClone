@@ -1,55 +1,40 @@
 import React, { useEffect, useState } from "react";
-import Card from "../components/Card/Card.jsx";
+import Card from "./Card.jsx";
 
 const Home = () => {
   const [animes, setAnimes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchAnimes = async () => {
-      try {
-        const response = await fetch("https://api.consumet.org/anime/gogoanime/top-airing", {
-          mode: 'cors',
-          headers: { 'Access-Control-Allow-Origin': '*' }
-        });
-        if (!response.ok) throw new Error('API fetch failed');
-        const data = await response.json();
+    fetch("https://zoro-api.onrender.com/anime/gogoanime/top-airing")
+      .then((res) => res.json())
+      .then((data) => {
         setAnimes(data.results || []);
-      } catch (err) {
-        console.error('Fetch error:', err);
-        setError('API down - showing placeholders');
-        // Fallback mock data for testing
-        setAnimes([
-          { id: 'one-piece', title: 'One Piece', image: 'https://via.placeholder.com/200x300?text=One+Piece', totalEpisodes: 1000 },
-          { id: 'naruto', title: 'Naruto', image: 'https://via.placeholder.com/200x300?text=Naruto', totalEpisodes: 720 },
-          { id: 'jujutsu-kaisen', title: 'Jujutsu Kaisen', image: 'https://via.placeholder.com/200x300?text=JJK', totalEpisodes: 47 }
-        ]);
-      } finally {
         setLoading(false);
-      }
-    };
-    fetchAnimes();
+      })
+      .catch(() => {
+        setLoading(false);
+        setAnimes([
+          { id: "one-piece", title: "One Piece", image: "https://via.placeholder.com/200x300?text=One+Piece", totalEpisodes: 1000 },
+          { id: "naruto", title: "Naruto", image: "https://via.placeholder.com/200x300?text=Naruto", totalEpisodes: 720 },
+          { id: "jujutsu-kaisen", title: "Jujutsu Kaisen", image: "https://via.placeholder.com/200x300?text=JJK", totalEpisodes: 47 },
+          { id: "demon-slayer", title: "Demon Slayer", image: "https://via.placeholder.com/200x300?text=DS", totalEpisodes: 55 },
+          { id: "attack-on-titan", title: "Attack on Titan", image: "https://via.placeholder.com/200x300?text=AOT", totalEpisodes: 89 },
+          { id: "death-note", title: "Death Note", image: "https://via.placeholder.com/200x300?text=DN", totalEpisodes: 37 }
+        ]);
+      });
   }, []);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-        <div className="text-white text-2xl">Loading Zoro Clone...</div>
-      </div>
-    );
-  }
+  if (loading) return <div className="flex items-center justify-center h-screen text-2xl">Loading Zoro...</div>;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-6">
-      <h1 className="text-4xl font-bold mb-8 text-center text-yellow-400">ZORO CLONE</h1>
-      {error && <p className="text-center text-red-400 mb-4">{error}</p>}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 max-w-7xl mx-auto">
+    <div className="p-6">
+      <h1 className="text-4xl font-bold mb-8 text-center text-yellow-400">ZORO CLONE 🔥</h1>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-7xl mx-auto">
         {animes.map((anime) => (
           <Card key={anime.id} anime={anime} />
         ))}
       </div>
-      {animes.length === 0 && <p className="text-center text-gray-400 mt-8">No anime loaded. Refresh to try again.</p>}
     </div>
   );
 };
