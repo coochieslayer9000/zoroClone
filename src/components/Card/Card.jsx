@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const AnimeCard = ({ anime }) => {
+const Card = ({ anime }) => {
   return (
     <Link to={`/watch/${anime.id}`} className="group block relative overflow-hidden rounded-lg shadow-lg">
       <img
@@ -18,4 +18,4 @@ const AnimeCard = ({ anime }) => {
   );
 };
 
-export default AnimeCard;
+export default Card;
