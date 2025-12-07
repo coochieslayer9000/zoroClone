@@ -1,45 +1,21 @@
-import React, { useState } from "react"
-import { FaPlay } from "react-icons/fa"
-import { C } from "./card.style"
-import CardToolTip from "../CardTooltip/CardToolTip"
-import useScrollTooltip from "../../hooks/useScrollTooltip"
+import React from "react";
+import { Link } from "react-router-dom";
 
-const Card = ({ data }) => {
-  const [showTooltip, setShowTooltip] = useState(false)
-  const { top, active, setActive } = useScrollTooltip()
-
-  const handleMouseEnter = () => {
-    setShowTooltip(true)
-    setActive(true)
-  }
-
-  const handleMouseLeave = () => {
-    setShowTooltip(false)
-    setActive(false)
-  }
-
+const AnimeCard = ({ anime }) => {
   return (
-    <C.Card
-      className={`card ${active ? "active" : ""}`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <C.Poster>
-        <C.Image src={data.entry.images.jpg.image_url} />
-        <C.InfoL>
-          <C.BtnL>SUB</C.BtnL> <C.BtnL>DUB</C.BtnL>
-        </C.InfoL>
-        <C.InfoR>
-          <C.BtnR>Ep {data.episodes[0].mal_id}</C.BtnR>
-        </C.InfoR>
-        <FaPlay />
-      </C.Poster>
-      <C.Details>
-        <C.Name>{data.entry.title}</C.Name>
-      </C.Details>
-      {showTooltip ? <CardToolTip show={showTooltip} top={top} /> : null}
-    </C.Card>
-  )
-}
+    <Link to={`/watch/${anime.id}`} className="group block relative overflow-hidden rounded-lg shadow-lg">
+      <img
+        src={anime.image}
+        alt={anime.title}
+        className="w-full h-64 object-cover group-hover:scale-110 transition duration-500"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent opacity-0 group-hover:opacity-100 transition" />
+      <div className="absolute bottom-0 left-0 right-0 p-4 text-white translate-y-4 group-hover:translate-y-0 transition">
+        <h3 className="font-bold text-lg line-clamp-2">{anime.title}</h3>
+        <p className="text-sm opacity-90">Ep {anime.totalEpisodes || "??"}</p>
+      </div>
+    </Link>
+  );
+};
 
-export default Card
+export default AnimeCard;
