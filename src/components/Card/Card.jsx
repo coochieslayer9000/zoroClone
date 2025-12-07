@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Card = ({ anime }) => {
   return (
-    <Link to={`/watch/${anime.id}`} className="group block relative overflow-hidden rounded-lg shadow-lg">
+    <Link to={`/watch/${anime.id}`} className="group block relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all">
       <img
         src={anime.image}
         alt={anime.title}
