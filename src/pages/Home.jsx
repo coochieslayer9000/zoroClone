@@ -1,24 +1,24 @@
-import React from 'react';
-import { useEffect } from 'react';
-import Discussion from '../components/Discussion/Discussion';
-import Featured from '../components/Featured/Featured';
-import Footer from '../components/Footer/Footer';
-import Hero from '../components/Hero/Hero';
-import MainContainer from '../components/MainContainer/MainContainer';
-import NavBar from '../components/NavBar/NavBar';
-import Trending from '../components/Trending/Trending';
+import React, { useEffect, useState } from "react";
+import AnimeCard from "../components/AnimeCard";
 
 const Home = () => {
+  const [animes, setAnimes] = useState([]);
+
+  useEffect(() => {
+    fetch("https://api.consumet.org/anime/gogoanime/top-airing")
+      .then(r => r.json())
+      .then(data => setAnimes(data.results || []));
+  }, []);
+
   return (
-    <>
-      <NavBar />
-      <Hero />
-      <Trending />
-      <Discussion />
-      <Featured />
-      <MainContainer />
-      <Footer />
-    </>
+    <div className="min-h-screen bg-gray-900 text-white p-6">
+      <h1 className="text-4xl font-bold mb-8 text-center">ZORO CLONE</h1>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+        {animes.map((anime) => (
+          <AnimeCard key={anime.id} anime={anime} />
+        ))}
+      </div>
+    </div>
   );
 };
 
